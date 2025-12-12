@@ -23,6 +23,10 @@ export const MainRoutesLinks: FC<MainRoutesLinksProps> = ({
       <Link onClick={onclick} href={"/contact"} className={className}>
         Contact
       </Link>
+
+      <Link onClick={onclick} href={"/products"} className={className}>
+        Products
+      </Link>
     </>
   );
 };
