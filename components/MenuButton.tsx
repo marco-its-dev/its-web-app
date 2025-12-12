@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ReactElement } from "react";
-import { Menu, menuIsOpened } from "./Menu";
+import { menuIsOpened } from "./Menu";
 import { observer } from "@legendapp/state/react";
 
 export const MenuButton = observer((): ReactElement => {
