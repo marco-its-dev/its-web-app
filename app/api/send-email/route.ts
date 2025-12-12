@@ -15,25 +15,48 @@ export type UserData = {
   message: string;
 };
 
-// const transporter = nodemailer.createTransport({
-//   host: "smtp.gmail.com",
-//   port: 465,
-//   secure: true, // usa SSL
-//   auth: {
-//     user: "your-email@gmail.com",  // il tuo indirizzo Gmail
-//     pass: "xxxx xxxx xxxx xxxx",   // password app (senza spazi!)
-//   },
-// });
-
 export async function POST(request: NextRequest) {
   const { name, surname, mail, message }: UserData = await request.json();
 
-  return NextResponse.json(
-    {
-      message: `Thanks ${name} ${surname} for sending the message!`,
-      success: true,
-      timestamp: Date.now(),
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.NEXT_PUBLIC_SMTP_EMAIL,
+      pass: process.env.NEXT_PUBLIC_SMTP_PASS,
     },
-    { status: 200 },
-  );
+  });
+
+  const mailOptions = {
+    subject: `New message from ${name} ${surname}`,
+    from: process.env.NEXT_PUBLIC_SMTP_EMAIL,
+    to: process.env.NEXT_PUBLIC_SMTP_EMAIL,
+    replyTo: mail,
+    text: message,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+
+    return NextResponse.json(
+      {
+        message: `Thanks ${name} ${surname} for sending the message!`,
+        success: true,
+        timestamp: Date.now(),
+      },
+      { status: 200 },
+    );
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: `Something is wrong: ${error}`,
+        success: false,
+        timestamp: Date.now(),
+      },
+      {
+        status: 500,
+      },
+    );
+  }
 }
