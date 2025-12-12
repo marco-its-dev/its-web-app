@@ -59,8 +59,6 @@ const Contact = observer((): ReactElement => {
     <div>
       <PageTitle title="Contact us!" />
 
-      {process.env.smtpEmail}
-
       {!isFormSubmitted.get() ? (
         <section className="bg-blue-800 p-[2vw]">
           <h2 className="pb-[2vw] font-extrabold">Compile the form, please!</h2>
