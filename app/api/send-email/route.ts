@@ -23,15 +23,15 @@ export async function POST(request: NextRequest) {
     port: 587,
     secure: false,
     auth: {
-      user: process.env.NEXT_PUBLIC_SMTP_EMAIL,
-      pass: process.env.NEXT_PUBLIC_SMTP_PASS,
+      user: process.env.SMTP_EMAIL,
+      pass: process.env.SMTP_PASS,
     },
   });
 
   const mailOptions = {
     subject: `New message from ${name} ${surname}`,
-    from: process.env.NEXT_PUBLIC_SMTP_EMAIL,
-    to: process.env.NEXT_PUBLIC_SMTP_EMAIL,
+    from: process.env.SMTP_EMAIL,
+    to: process.env.SMTP_EMAIL,
     replyTo: mail,
     text: message,
   };

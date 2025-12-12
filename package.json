@@ -12,6 +12,8 @@
   "dependencies": {
     "@legendapp/state": "^3.0.0-beta.42",
     "@next/env": "^16.0.10",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.0.1",
     "next": "^16.0.10",
     "nodemailer": "^7.0.11",
     "react": "19.2.0",
